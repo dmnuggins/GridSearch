@@ -1,8 +1,12 @@
 #include <iostream>
+#include "Map.h"
+#include "Room.h"
 
 using namespace std;
 
 int main() {
-    cout << "Hello World!" << endl;
+
+    Map newMap(9, 9);
+    newMap.displayMap();
     return 0;
 }
