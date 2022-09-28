@@ -1,5 +1,6 @@
 #include "Map.h"
 #include "Room.h"
+#include "Player.h"
 #include <iostream>
 
 using namespace std;
@@ -15,6 +16,19 @@ Map::~Map()
 {
 }
 
+bool Map::updateMap(char playerInput)
+{
+    if(playerInput == 'q')
+    {
+        cout << "Exited game..." << endl;
+       return false;
+    }
+    p1.movePlayer(playerInput);
+    displayMap();
+    return true;
+}
+
+// Displays map
 void Map::displayMap() 
 {
     cout << "Map is displayed" << endl;
@@ -22,22 +36,40 @@ void Map::displayMap()
     {
         for (int j = 0; j < length; j++)
         {
-            cout << "[" << checkRoom(i, j) << "]";
+            cout << "[" << getSymbol(i,j) << "]";
         }
         cout << endl;
     }
     
 }
 
-// Checks if parameter coords match with coordinates from rooms, if match, return X
-char Map::checkRoom(int x, int y)
+// Checks if rooms is present at given position
+bool Map::checkRoom(int x, int y)
 {
     for (int i = 0; i <= sizeof(*rooms); i++)
     {
         if(rooms[i].x == x && rooms[i].y == y)
-            return 'X';
+            return true;
     }
 
+    return false;
+}
+
+// Checks if Player is present at given position
+bool Map::checkPlayer(int x, int y)
+{
+    if(x == p1.getX() && y == p1.getY())
+        return true;
+    return false;
+}
+
+// Returns symbol of object given the paramter coords
+char Map::getSymbol(int x, int y)
+{
+    // if(checkRoom(x, y))
+    //     return 'X';
+    if(checkPlayer(x,y))
+        return 'O';
     return ' ';
 }
 
