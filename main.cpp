@@ -6,7 +6,7 @@ using namespace std;
 
 int main() {
 
-    Map newMap(9, 9);
+    Map newMap(7,7);
     newMap.displayMap();
     return 0;
 }
