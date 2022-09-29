@@ -6,13 +6,14 @@ using namespace std;
 
 bool checkInput(char playerInput);
 
-int main() {
+int main()
+{
 
     char playerInput;
     int moveCounter = 1;
-    Map newMap(7,7);
-    
-    while(newMap.updateMap(playerInput))
+    Map newMap(7, 7);
+
+    while (newMap.updateMap(playerInput))
     {
         cout << "Enter directional key (w,a,s,d): ";
         cin >> playerInput;
@@ -21,11 +22,10 @@ int main() {
         moveCounter++;
     }
 
-
     return 0;
 }
 
 bool checkInput(char playerInput)
 {
-
+    return false;
 }

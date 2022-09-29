@@ -3,17 +3,24 @@
 
 #include "Object.h"
 
-class Player: public Object
+class Player : public Object
 {
 private:
+    char direction;
+    int xMove, yMove;
 
 public:
     Player(/* args */);
     ~Player();
-    void movePlayer(char playerInput);
+
+    void setNextMove(char playerInput);
+    void resetNextMove();
+
+    void updatePlayer(char playerInput);
+    void movePlayer();
+    bool isColliding();
+    bool isOutOfBounds();
+    bool isHittingWall();
 };
-
-
-
 
 #endif

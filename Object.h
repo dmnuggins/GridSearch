@@ -6,6 +6,7 @@ class Object
 private:
     // Position
     int x, y;
+
 public:
     Object(/* args */);
     ~Object();
@@ -14,8 +15,5 @@ public:
     void setX(int x);
     void setY(int y);
 };
-
-
-
 
 #endif
