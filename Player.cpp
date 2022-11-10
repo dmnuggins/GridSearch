@@ -86,4 +86,15 @@ bool Player::isOutOfBounds()
 
 bool Player::isHittingWall()
 {
+    int curX = getX();
+    int curY = getY();
+
+    for (int i = 0; i < 9; i++)
+    {
+        /* code */
+    }
+
+    // check if player is entering room from above (like bucket)
+
+    return false;
 }
