@@ -4,12 +4,7 @@
 #include "Room.h"
 
 using namespace std;
-struct Point
-{
-    int x, y;
-};
-bool checkInput(char playerInput);
-Point rooms[9] = {{1, 1}, {1, 3}, {1, 5}, {3, 1}, {3, 3}, {3, 5}, {5, 1}, {5, 3}, {5, 5}};
+
 Player p1;
 
 int main()
@@ -21,10 +16,12 @@ int main()
 
     do
     {
+        system("CLS");
         cout << "Initial Map:" << endl;
         newMap.displayMap(p1);
         cout << "Move counter: " << moveCounter << endl;
         cout << "Player position: " << p1.getX() << ", " << p1.getY() << endl;
+        cout << "Player room status: " << p1.getRoomStatus() << endl;
         cout << "Enter directional key (w,a,s,d): ";
         cin >> playerInput;
         // force input to lowercase

@@ -8,6 +8,7 @@ class Player : public Object
 private:
     char direction;
     int xMove, yMove;
+    bool inRoom; // flag for if player is in room
 
 public:
     Player(/* args */);
@@ -15,6 +16,8 @@ public:
 
     void setNextMove(char playerInput);
     void resetNextMove();
+    void setRoomStatus(bool newState);
+    bool getRoomStatus();
 
     void updatePlayer(char playerInput);
     void movePlayer();

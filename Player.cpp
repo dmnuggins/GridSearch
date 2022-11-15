@@ -1,4 +1,5 @@
 #include "Player.h"
+#include "Room.h"
 #include <iostream>
 
 Player::Player(/* args */)
@@ -43,6 +44,15 @@ void Player::resetNextMove()
     yMove = 0;
 }
 
+void Player::setRoomStatus(bool newState)
+{
+    inRoom = newState;
+}
+
+bool Player::getRoomStatus()
+{
+    return inRoom;
+}
 void Player::updatePlayer(char playerInput)
 {
     if (!isColliding())
@@ -64,9 +74,9 @@ void Player::movePlayer()
 
 bool Player::isColliding()
 {
+    // checks if player is out of bounds
     if (isOutOfBounds()) //  || isHittingWall()
         return true;
-    // Check if player is out of bounds
     // Check if player is colliding with rooms
     return false;
 }
