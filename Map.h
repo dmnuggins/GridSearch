@@ -23,13 +23,14 @@ private:
 public:
     Map(int width, int length);
     ~Map();
-    bool updateMap(char playerInput);
+
     void displayMap(Player &p);
-    // Check room location relative to map
+    char getSymbol(Player &p, int x, int y);
+
     bool checkRoom(int x, int y);
     bool checkPlayer(Player &p, int x, int y);
-    void playerCross(Player &p); // checks if player crosses with room
-    char getSymbol(Player &p, int x, int y);
+    bool isPlayerColliding(Player &p);
+
     Point *getRooms();
 };
 

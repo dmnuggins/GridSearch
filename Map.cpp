@@ -82,19 +82,17 @@ bool Map::checkPlayer(Player &p1, int x, int y)
     return isPlayer;
 }
 
-void Map::playerCross(Player &p1)
+bool Map::isPlayerColliding(Player &p)
 {
-    for (int i = 0; i < sizeof(*rooms); i++)
+    if (p.getRoomStatus() == false) // if player is not in room
     {
-        bool checkX = p1.getX() == rooms[i].x;
-        bool checkY = p1.getY() == rooms[i].y;
-        if (checkX && checkY)
-        {
-            p1.setRoomStatus(true);
-            break;
-        }
     }
-} // checks if player crosses with room
+    else // if player is in room
+    {
+    }
+
+    return false;
+}
 
 Map::Point *Map::getRooms()
 {

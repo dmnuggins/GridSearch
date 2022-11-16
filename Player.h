@@ -16,14 +16,16 @@ public:
 
     void setNextMove(char playerInput);
     void resetNextMove();
+
     void setRoomStatus(bool newState);
     bool getRoomStatus();
 
     void updatePlayer(char playerInput);
     void movePlayer();
+
     bool isColliding();
     bool isOutOfBounds();
-    bool isHittingWall();
+    bool isHittingWall(Map map);
 };
 
 #endif

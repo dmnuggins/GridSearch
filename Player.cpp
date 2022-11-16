@@ -1,5 +1,6 @@
 #include "Player.h"
 #include "Room.h"
+#include "Map.h"
 #include <iostream>
 
 Player::Player(/* args */)
@@ -94,7 +95,7 @@ bool Player::isOutOfBounds()
     return false;
 }
 
-bool Player::isHittingWall()
+bool Player::isHittingWall(Map map)
 {
     int curX = getX();
     int curY = getY();
