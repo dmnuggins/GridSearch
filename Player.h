@@ -6,9 +6,9 @@
 class Player : public Object
 {
 private:
-    char direction;
-    int xMove, yMove;
-    bool inRoom; // flag for if player is in room
+    char direction;   // player direction
+    int nextX, nextY; // player's next movve
+    bool inRoom;      // flag for if player is in room
 
 public:
     Player(/* args */);
@@ -25,7 +25,6 @@ public:
 
     bool isColliding();
     bool isOutOfBounds();
-    bool isHittingWall(Map map);
 };
 
 #endif

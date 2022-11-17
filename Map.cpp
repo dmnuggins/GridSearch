@@ -1,71 +1,103 @@
 #include "Map.h"
-#include "Room.h"
-#include "Player.h"
-#include <iostream>
 
 using namespace std;
 
-Map::Map(int width, int length)
+Map::Map(Player p1)
 {
-    cout << "Map generated..." << endl;
-    this->length = length;
-    this->width = width;
+    std::cout << "Map initialized..." << std::endl;
+
+    // initialize room coordinates
+    rooms = new Room *[ROW];
+    for (int i = 0; i < ROW; i++)
+    {
+        rooms[i] = new Room[COL];
+        for (int j = 0; j < COL; j++)
+        {
+            rooms[i][j].setX(i);
+            rooms[i][j].setY(j);
+        }
+    }
+
+    // initialize chest rooms
+    for (int i = 1; i < ROW; i += 2)
+    {
+        for (int j = 0; j < COL; j++)
+        {
+            if (j == 1 || j == 3 || j == 5)
+            {
+                rooms[i][j].setChestSpawn(true);
+            }
+        }
+    }
+
+    rooms[0][0].setPlayer(true);
 }
 
 Map::~Map()
 {
 }
 
-// Displays map
-void Map::displayMap(Player &p1)
+void Map::initializeMap()
 {
-    for (int i = 0; i < width; i++)
+    // code
+}
+
+// Displays map
+void Map::displayMap()
+{
+    for (int i = 0; i < ROW; i++)
     {
-        for (int j = 0; j < length; j++)
+        for (int j = 0; j < COL; j++)
         {
-            cout << "[" << getSymbol(p1, i, j) << "]";
+            // cout << "[" << rooms[i][j].getX() << "," << rooms[i][j].getY() << "]"; // getSymbol(p1, i, j)
+            cout << "[" << symbol(rooms[i][j]) << "]"; // getSymbol(p1, i, j)
         }
         cout << endl;
     }
     cout << "Map is displayed" << endl;
 }
 
-// Returns symbol of object given the paramter coords
-char Map::getSymbol(Player &p1, int x, int y)
+// returns symbol based on room status
+char Map::symbol(Room room)
 {
-    char symbol;
-
-    if (checkPlayer(p1, x, y) && checkRoom(x, y))
+    if (room.getChestSpawn())
     {
-        symbol = 'O';
-        p1.setRoomStatus(true);
+        return 'X';
     }
-    else if (checkPlayer(p1, x, y) && !checkRoom(x, y))
+    else if (room.getPlayer())
     {
-        symbol = 'P';
-        p1.setRoomStatus(false);
-    }
-    else if (checkRoom(x, y) && !checkPlayer(p1, x, y))
-    {
-        symbol = 'X';
+        return 'P';
     }
     else
     {
-        symbol = ' ';
+        return ' ';
     }
-    return symbol;
 }
 
-// Checks if rooms is present at given position
-bool Map::checkRoom(int x, int y)
-{
-    for (int i = 0; i <= sizeof(*rooms); i++)
-    {
-        if (rooms[i].x == x && rooms[i].y == y)
-            return true;
-    }
-    return false;
-}
+// Returns symbol of object given the paramter coords
+// char Map::getSymbol(Player &p1, int x, int y)
+// {
+//     char symbol;
+
+//     if (checkPlayer(p1, x, y) && checkRoom(x, y))
+//     {
+//         symbol = 'O';
+//     }
+//     else if (checkPlayer(p1, x, y) && !checkRoom(x, y))
+//     {
+//         symbol = 'P';
+//         p1.setRoomStatus(false);
+//     }
+//     else if (checkRoom(x, y) && !checkPlayer(p1, x, y))
+//     {
+//         symbol = 'X';
+//     }
+//     else
+//     {
+//         symbol = ' ';
+//     }
+//     return symbol;
+// }
 
 // Checks if Player is present at given position (x, y)
 bool Map::checkPlayer(Player &p1, int x, int y)
@@ -80,21 +112,4 @@ bool Map::checkPlayer(Player &p1, int x, int y)
     }
 
     return isPlayer;
-}
-
-bool Map::isPlayerColliding(Player &p)
-{
-    if (p.getRoomStatus() == false) // if player is not in room
-    {
-    }
-    else // if player is in room
-    {
-    }
-
-    return false;
-}
-
-Map::Point *Map::getRooms()
-{
-    return rooms;
 }

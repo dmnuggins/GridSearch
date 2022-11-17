@@ -5,6 +5,8 @@
 
 Player::Player(/* args */)
 {
+    this->setX(0);
+    this->setY(0);
 }
 
 Player::~Player()
@@ -17,19 +19,19 @@ void Player::setNextMove(char playerInput)
     {
     case 'w':
         direction = playerInput;
-        xMove = -1;
+        nextX = -1;
         break;
     case 'a':
         direction = playerInput;
-        yMove = -1;
+        nextY = -1;
         break;
     case 's':
         direction = playerInput;
-        xMove = 1;
+        nextX = 1;
         break;
     case 'd':
         direction = playerInput;
-        yMove = 1;
+        nextY = 1;
         break;
     default:
         std::cout << "Invalid input..." << std::endl;
@@ -41,8 +43,8 @@ void Player::setNextMove(char playerInput)
 void Player::resetNextMove()
 {
     direction = ' ';
-    xMove = 0;
-    yMove = 0;
+    nextX = 0;
+    nextY = 0;
 }
 
 void Player::setRoomStatus(bool newState)
@@ -67,8 +69,8 @@ void Player::movePlayer()
 {
     int curX = getX();
     int curY = getY();
-    setX(curX + xMove);
-    setY(curY + yMove);
+    setX(curX + nextX);
+    setY(curY + nextY);
 
     resetNextMove();
 }
@@ -87,25 +89,10 @@ bool Player::isOutOfBounds()
     int curX = getX();
     int curY = getY();
     // check if player is outside of map bounds
-    if ((curX + xMove) > 6 || (curY + yMove) > 6 || (curX + xMove) < 0 || (curY + yMove) < 0)
+    if ((curX + nextX) > 6 || (curY + nextY) > 6 || (curX + nextX) < 0 || (curY + nextY) < 0)
     {
         std::cout << "Out of bounds..." << std::endl;
         return true;
     }
-    return false;
-}
-
-bool Player::isHittingWall(Map map)
-{
-    int curX = getX();
-    int curY = getY();
-
-    for (int i = 0; i < 9; i++)
-    {
-        /* code */
-    }
-
-    // check if player is entering room from above (like bucket)
-
     return false;
 }

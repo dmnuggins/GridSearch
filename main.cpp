@@ -5,27 +5,27 @@
 
 using namespace std;
 
-Player p1;
-
 int main()
 {
 
+    Player p1;
     char playerInput;
+    Map newMap(p1);
     int moveCounter = 1;
-    Map newMap(7, 7);
+    // Room **rooms = new Room *[7];
 
     do
     {
         system("CLS");
         cout << "Initial Map:" << endl;
-        newMap.displayMap(p1);
+        newMap.displayMap();
+
         cout << "Move counter: " << moveCounter << endl;
-        cout << "Player position: " << p1.getX() << ", " << p1.getY() << endl;
-        cout << "Player room status: " << p1.getRoomStatus() << endl;
+        // cout << "Player position: " << p1.getX() << ", " << p1.getY() << endl;
+        // cout << "Player room status: " << p1.getRoomStatus() << endl;
         cout << "Enter directional key (w,a,s,d): ";
         cin >> playerInput;
-        // force input to lowercase
-        playerInput = tolower(playerInput);
+        playerInput = tolower(playerInput); // forces input to lowercase
         moveCounter++;
 
         if (playerInput == 'q')
@@ -34,15 +34,17 @@ int main()
             break;
         }
 
-        p1.setNextMove(playerInput);
-        p1.updatePlayer(playerInput);
-        newMap.displayMap(p1);
+        // p1.setNextMove(playerInput);
+        // p1.updatePlayer(playerInput);
+        // newMap.displayMap(p1);
     } while (true);
 
-    return 0;
-}
+    // for (int i = 0; i < 7; i++)
+    // {
+    //     delete[] rooms[i];
+    // }
+    // delete[] rooms;
+    // rooms = NULL;
 
-bool checkInput(char playerInput)
-{
-    return false;
+    return 0;
 }
