@@ -7,8 +7,8 @@ class Player : public Object
 {
 private:
     char direction;   // player direction
-    int nextX, nextY; // player's next movve
-    bool inRoom;      // flag for if player is in room
+    int nextX, nextY; // player's next move
+    bool inChestRoom; // flag for if player is in room
 
 public:
     Player(/* args */);

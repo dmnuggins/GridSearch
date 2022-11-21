@@ -16,17 +16,19 @@ private:
     // Point rooms[9] = {{1, 1}, {1, 3}, {1, 5}, {3, 1}, {3, 3}, {3, 5}, {5, 1}, {5, 3}, {5, 5}};
 
 public:
-    Map(Player p1);
+    Map();
     ~Map();
 
     void initializeMap();
+    void updateMap(Player &p1);
 
     void displayMap();
     char symbol(Room room);
     char getSymbol(Player &p, int x, int y);
 
-    bool checkPlayer(Player &p, int x, int y);
-    bool isPlayerColliding(Player &p);
+    void checkPlayerBounds();
+
+    void clearMap();
 };
 
 #endif

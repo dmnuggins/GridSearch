@@ -7,6 +7,7 @@ Player::Player(/* args */)
 {
     this->setX(0);
     this->setY(0);
+    this->setRoomStatus(false);
 }
 
 Player::~Player()
@@ -19,19 +20,23 @@ void Player::setNextMove(char playerInput)
     {
     case 'w':
         direction = playerInput;
-        nextX = -1;
+        nextX = this->getX() - 1;
+        nextY = this->getY();
         break;
     case 'a':
         direction = playerInput;
-        nextY = -1;
+        nextX = this->getX();
+        nextY = this->getY() - 1;
         break;
     case 's':
         direction = playerInput;
-        nextX = 1;
+        nextX = this->getX() + 1;
+        nextY = this->getY();
         break;
     case 'd':
         direction = playerInput;
-        nextY = 1;
+        nextX = this->getX();
+        nextY = this->getY() + 1;
         break;
     default:
         std::cout << "Invalid input..." << std::endl;
@@ -49,15 +54,28 @@ void Player::resetNextMove()
 
 void Player::setRoomStatus(bool newState)
 {
-    inRoom = newState;
+    inChestRoom = newState;
 }
 
 bool Player::getRoomStatus()
 {
-    return inRoom;
+    return inChestRoom;
 }
 void Player::updatePlayer(char playerInput)
 {
+    // // check if player is in room
+    // if (inChestRoom)
+    // {
+    //     if (playerInput != 'w')
+    //         std::cout << "colliding" << std::endl;
+    //     else
+    //         setNextMove(playerInput);
+    // }
+    // else // when player is no longer in room
+    // {
+    //     // set next move
+    // }
+
     if (!isColliding())
     {
         movePlayer();
@@ -69,8 +87,8 @@ void Player::movePlayer()
 {
     int curX = getX();
     int curY = getY();
-    setX(curX + nextX);
-    setY(curY + nextY);
+    setX(nextX);
+    setY(nextY);
 
     resetNextMove();
 }
@@ -89,7 +107,7 @@ bool Player::isOutOfBounds()
     int curX = getX();
     int curY = getY();
     // check if player is outside of map bounds
-    if ((curX + nextX) > 6 || (curY + nextY) > 6 || (curX + nextX) < 0 || (curY + nextY) < 0)
+    if ((nextX) > 6 || (nextY) > 6 || (nextX) < 0 || (nextY) < 0)
     {
         std::cout << "Out of bounds..." << std::endl;
         return true;

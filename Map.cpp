@@ -2,7 +2,7 @@
 
 using namespace std;
 
-Map::Map(Player p1)
+Map::Map()
 {
     std::cout << "Map initialized..." << std::endl;
 
@@ -42,6 +42,37 @@ void Map::initializeMap()
     // code
 }
 
+void Map::updateMap(Player &p1)
+{
+    // update map with coordinate changes from player
+    for (int i = 0; i < ROW; i++)
+    {
+        for (int j = 0; j < COL; j++)
+        {
+            // update player flag on rooms
+            if ((rooms[i][j].getX() != p1.getX()) || (rooms[i][j].getY() != p1.getY()))
+            {
+                rooms[i][j].setPlayer(false);
+            }
+            else if ((rooms[i][j].getX() == p1.getX()) && (rooms[i][j].getY() == p1.getY()))
+            {
+                rooms[i][j].setPlayer(true);
+
+                // checks if room is also a chest location
+                if (rooms[i][j].getChestSpawn())
+                {
+                    p1.setRoomStatus(true); // set player chest spawn flag true
+                }
+                else
+                {
+                    p1.setRoomStatus(false);
+                }
+            }
+        }
+        cout << endl;
+    }
+}
+
 // Displays map
 void Map::displayMap()
 {
@@ -60,13 +91,17 @@ void Map::displayMap()
 // returns symbol based on room status
 char Map::symbol(Room room)
 {
-    if (room.getChestSpawn())
+    if (room.getPlayer() && room.getChestSpawn())
     {
-        return 'X';
+        return 'O';
     }
     else if (room.getPlayer())
     {
         return 'P';
+    }
+    else if (room.getChestSpawn())
+    {
+        return 'X';
     }
     else
     {
@@ -74,42 +109,16 @@ char Map::symbol(Room room)
     }
 }
 
-// Returns symbol of object given the paramter coords
-// char Map::getSymbol(Player &p1, int x, int y)
-// {
-//     char symbol;
-
-//     if (checkPlayer(p1, x, y) && checkRoom(x, y))
-//     {
-//         symbol = 'O';
-//     }
-//     else if (checkPlayer(p1, x, y) && !checkRoom(x, y))
-//     {
-//         symbol = 'P';
-//         p1.setRoomStatus(false);
-//     }
-//     else if (checkRoom(x, y) && !checkPlayer(p1, x, y))
-//     {
-//         symbol = 'X';
-//     }
-//     else
-//     {
-//         symbol = ' ';
-//     }
-//     return symbol;
-// }
-
-// Checks if Player is present at given position (x, y)
-bool Map::checkPlayer(Player &p1, int x, int y)
+void Map::checkPlayerBounds()
 {
-    bool isPlayer = false;
+}
 
-    // checks if player is present in location
-    if (x == p1.getX() && y == p1.getY())
-
+void Map::clearMap()
+{
+    for (int i = 0; i < 7; i++)
     {
-        isPlayer = true;
+        delete[] rooms[i];
     }
-
-    return isPlayer;
+    delete[] rooms;
+    rooms = NULL;
 }
