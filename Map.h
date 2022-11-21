@@ -21,12 +21,15 @@ public:
 
     void initializeMap();
     void updateMap(Player &p1);
+    void updatePlayer(Player &p1);
 
     void displayMap();
     char symbol(Room room);
     char getSymbol(Player &p, int x, int y);
 
-    void checkPlayerBounds();
+
+
+    void checkPlayerCollision();
 
     void clearMap();
 };

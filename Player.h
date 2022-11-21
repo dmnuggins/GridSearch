@@ -19,6 +19,9 @@ public:
 
     void setRoomStatus(bool newState);
     bool getRoomStatus();
+    char getPlayerDirection();
+    int getNextX();
+    int getNextY();
 
     void updatePlayer(char playerInput);
     void movePlayer();

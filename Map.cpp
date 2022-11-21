@@ -37,11 +37,6 @@ Map::~Map()
 {
 }
 
-void Map::initializeMap()
-{
-    // code
-}
-
 void Map::updateMap(Player &p1)
 {
     // update map with coordinate changes from player
@@ -69,7 +64,42 @@ void Map::updateMap(Player &p1)
                 }
             }
         }
-        cout << endl;
+    }
+}
+
+// update player based on user input and next move set
+void Map::updatePlayer(Player &p1)
+{
+    char input = p1.getPlayerDirection();
+    if (p1.getRoomStatus())
+    {
+        if (input != 'w')
+        {
+            std::cout << "ERROR::colliding inside chest room" << std::endl;
+            // reset the next move
+            p1.resetNextMove();
+        }
+        else
+        {
+            p1.movePlayer();
+        }
+    }
+    else // if player chestroomstatus is false
+    {
+        if (input != 's' && rooms[p1.getNextX()][p1.getNextY()].getChestSpawn())
+        {
+            std::cout << "ERROR::colliding with chest room" << std::endl;
+            p1.resetNextMove();
+        }
+        else if (p1.isOutOfBounds()) // with outer bounds of the map
+        {
+            std::cout << "ERROR::colliding with outer bounds" << std::endl;
+            p1.resetNextMove();
+        }
+        else
+        {
+            p1.movePlayer();
+        }
     }
 }
 
@@ -109,7 +139,7 @@ char Map::symbol(Room room)
     }
 }
 
-void Map::checkPlayerBounds()
+void Map::checkPlayerCollision()
 {
 }
 

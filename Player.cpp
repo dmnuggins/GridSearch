@@ -61,20 +61,36 @@ bool Player::getRoomStatus()
 {
     return inChestRoom;
 }
+
+char Player::getPlayerDirection()
+{
+    return direction;
+}
+
+int Player::getNextX()
+{
+    return nextX;
+}
+
+int Player::getNextY()
+{
+    return nextY;
+}
+
 void Player::updatePlayer(char playerInput)
 {
-    // // check if player is in room
-    // if (inChestRoom)
-    // {
-    //     if (playerInput != 'w')
-    //         std::cout << "colliding" << std::endl;
-    //     else
-    //         setNextMove(playerInput);
-    // }
-    // else // when player is no longer in room
-    // {
-    //     // set next move
-    // }
+    // check if player is in room
+    if (inChestRoom)
+    {
+        if (playerInput != 'w')
+            std::cout << "colliding" << std::endl;
+        else
+            setNextMove(playerInput);
+    }
+    else // when player is no longer in room
+    {
+        // set next move
+    }
 
     if (!isColliding())
     {
@@ -93,15 +109,6 @@ void Player::movePlayer()
     resetNextMove();
 }
 
-bool Player::isColliding()
-{
-    // checks if player is out of bounds
-    if (isOutOfBounds()) //  || isHittingWall()
-        return true;
-    // Check if player is colliding with rooms
-    return false;
-}
-
 bool Player::isOutOfBounds()
 {
     int curX = getX();
@@ -109,7 +116,7 @@ bool Player::isOutOfBounds()
     // check if player is outside of map bounds
     if ((nextX) > 6 || (nextY) > 6 || (nextX) < 0 || (nextY) < 0)
     {
-        std::cout << "Out of bounds..." << std::endl;
+        // std::cout << "Out of bounds..." << std::endl;
         return true;
     }
     return false;

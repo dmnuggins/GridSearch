@@ -16,7 +16,7 @@ int main()
 
     do
     {
-        system("CLS");
+        // system("CLS");
         cout << "Initial Map:" << endl;
         newMap.displayMap();
 
@@ -35,9 +35,9 @@ int main()
         }
 
         p1.setNextMove(playerInput);
-        p1.updatePlayer(playerInput);
+        newMap.updatePlayer(p1);
+        // p1.updatePlayer(playerInput);
         newMap.updateMap(p1);
-        // newMap.displayMap();
     } while (true);
 
     // frees up memory
