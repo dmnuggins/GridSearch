@@ -77,28 +77,6 @@ int Player::getNextY()
     return nextY;
 }
 
-void Player::updatePlayer(char playerInput)
-{
-    // check if player is in room
-    if (inChestRoom)
-    {
-        if (playerInput != 'w')
-            std::cout << "colliding" << std::endl;
-        else
-            setNextMove(playerInput);
-    }
-    else // when player is no longer in room
-    {
-        // set next move
-    }
-
-    if (!isColliding())
-    {
-        movePlayer();
-    }
-    resetNextMove();
-}
-
 void Player::movePlayer()
 {
     int curX = getX();

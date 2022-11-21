@@ -16,7 +16,7 @@ int main()
 
     do
     {
-        // system("CLS");
+        system("CLS");
         cout << "Initial Map:" << endl;
         newMap.displayMap();
 
