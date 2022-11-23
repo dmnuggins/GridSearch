@@ -4,8 +4,7 @@ using namespace std;
 
 Map::Map()
 {
-    std::cout << "Map initialized..." << std::endl;
-
+    int roomIndex = 0;
     // initialize room coordinates
     rooms = new Room *[ROW];
     for (int i = 0; i < ROW; i++)
@@ -26,11 +25,22 @@ Map::Map()
             if (j == 1 || j == 3 || j == 5)
             {
                 rooms[i][j].setChestSpawn(true);
+                rooms[i][j].setRoomNum(roomIndex);
+
+                // initialize treasure spawn
+                if (treasure.getChestIndex() == rooms[i][j].getRoomNum())
+                {
+                    rooms[i][j].setTreasure(true);
+                }
+                roomIndex++;
             }
         }
     }
 
+    // set initial player position
     rooms[0][0].setPlayer(true);
+
+    std::cout << "Map initialized..." << std::endl;
 }
 
 Map::~Map()
@@ -116,27 +126,35 @@ void Map::displayMap()
         cout << endl;
     }
     cout << "Map is displayed" << endl;
+    cout << "Treaure index: " << treasure.getChestIndex() << endl;
 }
 
 // returns symbol based on room status
 char Map::symbol(Room room)
 {
+    char symbol;
     if (room.getPlayer() && room.getChestSpawn())
     {
-        return 'O';
+        symbol = 'O';
     }
     else if (room.getPlayer())
     {
-        return 'P';
+        symbol = 'P';
     }
     else if (room.getChestSpawn())
     {
-        return 'X';
+        symbol = 'X';
+        if (room.getTreasureState())
+        {
+            symbol = 'T';
+        }
     }
     else
     {
-        return ' ';
+        symbol = ' ';
     }
+
+    return symbol;
 }
 
 void Map::checkPlayerCollision()

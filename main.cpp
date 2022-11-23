@@ -2,6 +2,7 @@
 #include "Map.h"
 #include "Player.h"
 #include "Room.h"
+#include "Chest.h"
 
 using namespace std;
 

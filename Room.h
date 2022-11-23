@@ -6,17 +6,23 @@
 class Room : public Object
 {
 private:
-    bool playerHere;   // check if player is in room
-    bool chestSpawn;   // flag for if room is chest spawn
-    bool treasureHere; // flag for when treasure is inside chest
+    bool playerHere;    // check if player is in room
+    bool chestSpawn;    // flag for if room is chest spawn
+    bool treasureState; // flag for when treasure is inside chest
+    int roomNum;        // room index number for spawn reference
+
 public:
     Room(/* args */);
     ~Room();
 
     void setPlayer(bool state);
     void setChestSpawn(bool state);
+    void setTreasure(bool state);
+    void setRoomNum(int index);
     bool getPlayer();
     bool getChestSpawn();
+    bool getTreasureState();
+    int getRoomNum();
 };
 
 #endif

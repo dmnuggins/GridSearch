@@ -7,6 +7,8 @@ Room::Room(/* args */)
 {
     playerHere = false;
     chestSpawn = false;
+    treasureState = false;
+    roomNum = -1;
 }
 
 Room::~Room()
@@ -23,6 +25,16 @@ void Room::setChestSpawn(bool state)
     chestSpawn = state;
 }
 
+void Room::setTreasure(bool state)
+{
+    treasureState = state;
+}
+
+void Room::setRoomNum(int index)
+{
+    roomNum = index;
+}
+
 bool Room::getPlayer()
 {
     return playerHere;
@@ -31,4 +43,14 @@ bool Room::getPlayer()
 bool Room::getChestSpawn()
 {
     return chestSpawn;
+}
+
+bool Room::getTreasureState()
+{
+    return treasureState;
+}
+
+int Room::getRoomNum()
+{
+    return roomNum;
 }
