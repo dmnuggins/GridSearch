@@ -47,7 +47,6 @@ void Player::setNextMove(char playerInput)
 // Reset player movement values
 void Player::resetNextMove()
 {
-    direction = ' ';
     nextX = 0;
     nextY = 0;
 }

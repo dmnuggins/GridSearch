@@ -25,6 +25,7 @@ public:
     void updatePlayer(Player &p1);
 
     void displayMap();
+    void setPlayerVision(Player &p1);
     char symbol(Room room);
     char getSymbol(Player &p, int x, int y);
 

@@ -49,6 +49,18 @@ Map::~Map()
 
 void Map::updateMap(Player &p1)
 {
+    // stores player input direction
+    char direction = p1.getPlayerDirection();
+
+    // clear visibility flags
+    for (int i = 0; i < ROW; i++)
+    {
+        for (int j = 0; j < COL; j++)
+        {
+            rooms[i][j].setVisibility(false);
+        }
+    }
+
     // update map with coordinate changes from player
     for (int i = 0; i < ROW; i++)
     {
@@ -63,9 +75,6 @@ void Map::updateMap(Player &p1)
             {
                 rooms[i][j].setPlayer(true);
 
-                // update visibility state of adjacent rooms
-                // insert code here
-
                 // checks if room is also a chest location
                 if (rooms[i][j].getChestSpawn())
                 {
@@ -78,6 +87,8 @@ void Map::updateMap(Player &p1)
             }
         }
     }
+
+    setPlayerVision(p1);
 }
 
 // update player based on user input and next move set
@@ -132,6 +143,31 @@ void Map::displayMap()
     cout << "Treaure index: " << treasure.getChestIndex() << endl;
 }
 
+void Map::setPlayerVision(Player &p1) // sets player vision
+{
+    int x = p1.getX();
+    int y = p1.getY();
+    bool playerInsideRoom = p1.getRoomStatus();
+
+    // update visibilty flag of adjacent rooms based on player position
+    if (x - 1 >= 0 && !rooms[x - 1][y].getChestSpawn()) // w
+    {
+        rooms[x - 1][y].setVisibility(true);
+    }
+    if (y - 1 >= 0 && !playerInsideRoom && !rooms[x][y - 1].getChestSpawn()) // a
+    {
+        rooms[x][y - 1].setVisibility(true);
+    }
+    if (x + 1 < ROW && !playerInsideRoom) // s
+    {
+        rooms[x + 1][y].setVisibility(true);
+    }
+    if (y + 1 < COL && !playerInsideRoom && !rooms[x][y + 1].getChestSpawn()) // d
+    {
+        rooms[x][y + 1].setVisibility(true);
+    }
+}
+
 // returns symbol based on room status
 char Map::symbol(Room room)
 {
@@ -144,12 +180,20 @@ char Map::symbol(Room room)
     {
         symbol = 'P';
     }
-    else if (room.getChestSpawn())
+    else if (!room.getVisibility() && room.getChestSpawn())
     {
         symbol = 'X';
-        if (room.getTreasureState())
+    }
+    else if (room.getVisibility())
+    {
+        symbol = '*';
+        if (room.getChestSpawn())
         {
-            symbol = 'T';
+            symbol = 'E';
+            if (room.getTreasureState())
+            {
+                symbol = 'T';
+            }
         }
     }
     else

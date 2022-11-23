@@ -7,6 +7,7 @@ class Room : public Object
 {
 private:
     bool playerHere;    // check if player is in room
+    bool enemyHere;     // check if enemy is in room
     bool chestSpawn;    // flag for if room is chest spawn
     bool treasureState; // flag for when treasure is inside chest
     int roomNum;        // room index number for spawn reference

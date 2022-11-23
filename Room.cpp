@@ -6,8 +6,10 @@ using namespace std;
 Room::Room(/* args */)
 {
     playerHere = false;
+    enemyHere = false;
     chestSpawn = false;
     treasureState = false;
+    visible = false;
     roomNum = -1;
 }
 
