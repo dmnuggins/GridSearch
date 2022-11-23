@@ -161,6 +161,17 @@ void Map::checkPlayerCollision()
 {
 }
 
+bool Map::isTreasureFound(Player p1)
+{
+    // if player position is in room that has treasure state as true
+    if (rooms[p1.getX()][p1.getY()].getTreasureState())
+    {
+        return true;
+    }
+
+    return false;
+}
+
 void Map::clearMap()
 {
     for (int i = 0; i < 7; i++)

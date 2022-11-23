@@ -18,7 +18,6 @@ int main()
     do
     {
         system("CLS");
-        cout << "Initial Map:" << endl;
         newMap.displayMap();
 
         cout << "Move counter: " << moveCounter << endl;
@@ -37,8 +36,16 @@ int main()
 
         p1.setNextMove(playerInput);
         newMap.updatePlayer(p1);
-        // p1.updatePlayer(playerInput);
         newMap.updateMap(p1);
+        bool winCon = newMap.isTreasureFound(p1);
+
+        if (winCon)
+        {
+            system("CLS");
+            newMap.displayMap();
+            cout << "TREASURE FOUND!!!" << endl;
+            break;
+        }
     } while (true);
 
     // frees up memory

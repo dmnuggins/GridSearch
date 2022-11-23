@@ -29,6 +29,7 @@ public:
     char getSymbol(Player &p, int x, int y);
 
     void checkPlayerCollision();
+    bool isTreasureFound(Player p1);
 
     void clearMap();
 };
