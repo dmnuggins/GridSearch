@@ -14,7 +14,11 @@ private:
     char playerInput;
     Room **rooms;
     Chest treasure;
-    // Point rooms[9] = {{1, 1}, {1, 3}, {1, 5}, {3, 1}, {3, 3}, {3, 5}, {5, 1}, {5, 3}, {5, 5}};
+
+    struct Point
+    {
+        int x, y;
+    };
 
 public:
     Map();

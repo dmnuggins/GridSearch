@@ -22,6 +22,11 @@ void Room::setPlayer(bool state)
     playerHere = state;
 }
 
+void Room::setEnemy(bool state)
+{
+    enemyHere = state;
+}
+
 void Room::setChestSpawn(bool state)
 {
     chestSpawn = state;
@@ -45,6 +50,11 @@ void Room::setVisibility(bool state)
 bool Room::getPlayer()
 {
     return playerHere;
+}
+
+bool Room::getEnemy()
+{
+    return enemyHere;
 }
 
 bool Room::getChestSpawn()

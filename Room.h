@@ -18,12 +18,14 @@ public:
     ~Room();
 
     void setPlayer(bool state);
+    void setEnemy(bool state);
     void setChestSpawn(bool state);
     void setTreasure(bool state);
     void setRoomNum(int index);
     void setVisibility(bool state);
 
     bool getPlayer();
+    bool getEnemy();
     bool getChestSpawn();
     bool getTreasureState();
     bool getVisibility();

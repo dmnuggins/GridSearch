@@ -39,8 +39,8 @@ Map::Map()
 
     // set initial player position
     rooms[0][0].setPlayer(true);
-
-    std::cout << "Map initialized..." << std::endl;
+    rooms[1][0].setVisibility(true);
+    rooms[0][1].setVisibility(true);
 }
 
 Map::~Map()
@@ -130,6 +130,8 @@ void Map::updatePlayer(Player &p1)
 // Displays map
 void Map::displayMap()
 {
+    cout << "GRIDSEARCH" << endl;
+    cout << "==========" << endl;
     for (int i = 0; i < ROW; i++)
     {
         for (int j = 0; j < COL; j++)
@@ -139,7 +141,6 @@ void Map::displayMap()
         }
         cout << endl;
     }
-    cout << "Map is displayed" << endl;
     cout << "Treaure index: " << treasure.getChestIndex() << endl;
 }
 
