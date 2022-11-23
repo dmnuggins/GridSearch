@@ -10,6 +10,7 @@ private:
     bool chestSpawn;    // flag for if room is chest spawn
     bool treasureState; // flag for when treasure is inside chest
     int roomNum;        // room index number for spawn reference
+    bool visible;       // flag if visible to player
 
 public:
     Room(/* args */);
@@ -19,9 +20,12 @@ public:
     void setChestSpawn(bool state);
     void setTreasure(bool state);
     void setRoomNum(int index);
+    void setVisibility(bool state);
+
     bool getPlayer();
     bool getChestSpawn();
     bool getTreasureState();
+    bool getVisibility();
     int getRoomNum();
 };
 

@@ -63,6 +63,9 @@ void Map::updateMap(Player &p1)
             {
                 rooms[i][j].setPlayer(true);
 
+                // update visibility state of adjacent rooms
+                // insert code here
+
                 // checks if room is also a chest location
                 if (rooms[i][j].getChestSpawn())
                 {

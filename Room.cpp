@@ -35,6 +35,11 @@ void Room::setRoomNum(int index)
     roomNum = index;
 }
 
+void Room::setVisibility(bool state)
+{
+    visible = state;
+}
+
 bool Room::getPlayer()
 {
     return playerHere;
@@ -48,6 +53,11 @@ bool Room::getChestSpawn()
 bool Room::getTreasureState()
 {
     return treasureState;
+}
+
+bool Room::getVisibility()
+{
+    return visible;
 }
 
 int Room::getRoomNum()
